@@ -1,81 +1,133 @@
-Prerequisites
-Python (version 3.8 or higher)
-Virtual Environment for Python
-Visual Studio Code (VSCode) - optional, recommended for Python and Flask development
-Setup Instructions
-1. Clone the Repository
-To get started, clone this repository: 
+# Rule Engine with AST
 
-bash
-Copy code
-git clone <repository-url>
-cd <repository-name>
-2. Set Up a Virtual Environment
-Inside the backend folder, create a virtual environment:
+A Flask-based rule engine that parses, evaluates, and modifies conditional rules using Abstract Syntax Trees (AST). This project allows users to create, combine, evaluate, and modify rules that can be used to make dynamic data-driven decisions. The engine uses SQLAlchemy for rule storage in an SQLite database, and Flask-CORS is enabled for cross-origin resource sharing.
 
-bash
-Copy code
-cd backend
-python -m venv venv
-3. Activate the Virtual Environment
-Windows:
+---
 
-bash
-Copy code
-.\venv\Scripts\activate
-MacOS/Linux:
+## Table of Contents
+- [Features](#features)
+- [Tech Stack](#tech-stack)
+- [Setup](#setup)
+- [Usage](#usage)
+- [API Endpoints](#api-endpoints)
+- [Testing](#testing)
 
-bash
-Copy code
-source venv/bin/activate
-4. Install Required Packages
-Install the dependencies listed in requirements.txt:
 
-bash
-Copy code
-pip install -r requirements.txt
-5. Select Python Interpreter in VSCode (Optional)
-To ensure VSCode uses the virtual environment’s Python interpreter:
+---
 
-Open VSCode and navigate to the backend folder.
-Go to View > Command Palette and type Python: Select Interpreter.
-Choose venv\Scripts\python.exe from the list.
-6. Set Up the SQLite Database
-The application uses SQLite for storing rules. The database will be automatically initialized when running main.py.
+## Features
+- **Create Rules:** Define rules with conditions using logical operators like `AND`, `OR`.
+- **Combine Rules:** Combine multiple rules into a single rule with logical connectors.
+- **Evaluate Rules:** Evaluate rules against incoming data to get boolean results.
+- **Modify Rules:** Update existing rules to adjust to changing requirements.
+- **Store Rules:** Store rules and their AST representations in an SQLite database.
 
-7. Run the Backend Server
-To start the backend server:
+## Tech Stack
+- **Backend:** Flask
+- **Database:** SQLAlchemy with SQLite
+- **Other Libraries:** Flask-CORS, Logging, JSON
 
-bash
-Copy code
-python main.py
-The Flask server will run on http://127.0.0.1:5000 by default. You should see a message indicating that the server is running in debug mode.
+---
 
-8. Access the Frontend
-Open the index.html file in a web browser to use the frontend interface. This HTML file provides a UI to create, combine, evaluate, and modify rules through the backend server’s API.
+## Setup
 
-Usage
-Create Rule: Enter a rule string (e.g., age > 25) in the frontend and click Create Rule.
-Combine Rules: Provide the IDs of rules to combine, separated by commas (e.g., 1,2,3), and click Combine Rules.
-Evaluate Rule: Provide the rule ID and data in JSON format (e.g., { "age": 30, "income": 50000 }) and click Evaluate Rule.
-Modify Rule: Enter a rule ID and a new rule string to modify an existing rule.
-Testing
-Unit tests are provided in test.py. To run the tests:
+1. **Clone the repository**
+   ```bash
+   git clone https://github.com/your-username/rule-engine-ast.git
+   cd rule-engine-ast
 
-Make sure the virtual environment is activated.
-Run the tests using the following command:
-bash
-Copy code
-python -m unittest test.py
-Project Configuration
-Configuration Options
-Database: The database is configured to use SQLite with rules.db as the filename. This can be modified in main.py if needed.
-Logging: Logging is set to DEBUG level to capture detailed logs. This can be adjusted by modifying logging.basicConfig(level=logging.DEBUG) in main.py.
-API Endpoints
-POST /create_rule: Creates a new rule.
-POST /combine_rules: Combines multiple rules using AND logic.
-POST /evaluate_rule: Evaluates a rule with provided data.
-POST /modify_rule: Modifies an existing rule.
-Troubleshooting
-If the virtual environment fails to activate, ensure you are in the correct directory and that Python is installed.
-If the frontend fails to communicate with the backend, verify that the backend server is running at http://127.0.0.1:5000.
+2. **Create a virtual environment**
+   ```bash
+   python3 -m venv venv
+   source venv/bin/activate  # On Windows, use venv\Scripts\activate
+
+3. **Install dependencies**
+   ```bash
+    pip install -r requirements.txt
+
+4. **Run the application**
+   ```bash
+    python main.py
+
+## Usage
+### Running the Server
+1. **Start the Flask server by running:**
+   ```bash
+    python main.py
+### The server will be available at http://127.0.0.1:5000.
+
+##API Endpoints
+1. **Create Rule**
+   - Endpoint: POST /create_rule
+   - Description: Create a new rule and store its AST representation.
+   - Payload Example:
+   ```json
+       {
+          "rule_string": "(age > 25 AND income > 50000)"
+       }
+2. **Combine Rules**
+   - Endpoint: POST /combine_rules
+   - Description: Combine existing rules using AND or OR operators.
+   - Payload Example:
+   ```json
+       {
+          "rule_ids": [1, 2]
+       }
+   
+3. **Evaluate Rule**
+   - Endpoint: POST /evaluate_rule
+   - Description: Evaluate a rule with the provided data.
+   - Payload Example:
+   ```json
+       {
+          "rule_id": 1,
+          "data": {"age": 30, "income": 60000}
+       }
+
+4. **Modify Rule**
+   - Endpoint: POST /modify_rule
+   - Description: Modify an existing rule by updating its condition.
+   - Payload Example:
+   ```json
+       {
+          "rule_id": 1,
+           "new_rule_string": "age > 30"
+       }
+## Testing
+### Unit tests are included to verify the rule creation, combination, evaluation, and modification functionalities.
+1. **Run the tests**
+   ```bash
+    python -m unittest test.py
+2. **Test Coverage**
+   - test_create_rule: Validates rule creation with different conditions.
+   - test_combine_rules: Verifies correct functionality of rule combination.
+   - test_evaluate_rule: Checks the evaluation results for different datasets.
+   - test_modify_rule: Ensures that rule modification works as expected.
+   - test_error_handling: Tests error handling for non-existent rules.
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
