@@ -33,7 +33,7 @@ A Flask-based rule engine that parses, evaluates, and modifies conditional rules
 
 1. **Clone the repository**
    ```bash
-   git clone https://github.com/your-username/rule-engine-ast.git
+   git clone https://github.com/jayav26/rule-engine-ast.git
    cd rule-engine-ast
 
 2. **Create a virtual environment**
@@ -54,9 +54,13 @@ A Flask-based rule engine that parses, evaluates, and modifies conditional rules
 1. **Start the Flask server by running:**
    ```bash
     python main.py
-### The server will be available at http://127.0.0.1:5000.
+### The backend server will be available at http://127.0.0.1:5000.
+## Frontend Running 
+### Open index.html file .
+### For front end to fetch data from backend, make sure your backend server is running at port 5000
+### If you have any other application running on port 5000, and if you are running backend on any other port, make sure you update this line  const BASE_URL = 'http://127.0.0.1:5000'; in index.html. replace '5000' with the port that your backend is running on.
 
-##API Endpoints
+## API Endpoints
 1. **Create Rule**
    - Endpoint: POST /create_rule
    - Description: Create a new rule and store its AST representation.
@@ -106,6 +110,12 @@ A Flask-based rule engine that parses, evaluates, and modifies conditional rules
    - test_error_handling: Tests error handling for non-existent rules.
   
 
+## VS Code Python Interpreter Configuration To ensure VS Code uses the virtual environment, select the Python interpreter:
+
+   **Open VS Code.**
+   **Press Ctrl+Shift+P and select Python: Select Interpreter.**
+   **Choose the Python interpreter from venv/Scripts/python.exe.**
+   
 
 
 
