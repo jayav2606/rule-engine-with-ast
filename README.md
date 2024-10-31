@@ -128,6 +128,7 @@ A Flask-based rule engine that parses, evaluates, and modifies conditional rules
 
 
 
+![Screenshot (691)](https://github.com/user-attachments/assets/0cc5021b-2e90-4a6b-bae1-ef294f6e1ea3)
 
 
 
